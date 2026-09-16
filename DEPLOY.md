@@ -45,6 +45,21 @@ DEFAULT_TARGET_URL        https://neemans.com/products/the-luxe-loafers-tan
 cap at 60 seconds and every audit times out. With it, the cap is 300s on both
 Hobby and Pro, which is what `vercel.json` requests via `maxDuration`.
 
+### Version pinning, which is not optional here
+
+`@sparticuz/chromium`'s major must match the Chromium that `playwright-core`
+expects, or the browser starts and dies instantly with the unhelpful message
+`Target page, context or browser has been closed`.
+
+| Package | Pinned at | Chromium |
+| --- | --- | --- |
+| `playwright-core` | 1.63.0 | expects 153 |
+| `@sparticuz/chromium` | 153.0.0 | provides 153 |
+
+`browser.js` asserts this at launch and throws a message naming the real problem.
+`engines.node` is `>=22.17.0` because `@sparticuz/chromium@153` requires it and
+Vercel reads that field to choose the runtime.
+
 Honest expectations on this path:
 
 - **Cold starts hurt.** Unpacking Chromium adds ~5–10s to the first audit after
