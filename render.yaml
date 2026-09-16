@@ -1,0 +1,24 @@
+# One-click backend deploy on Render. The free tier sleeps after inactivity, so
+# the first audit after a quiet period pays a cold start.
+services:
+  - type: web
+    name: preflight-auditor-api
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: starter
+    healthCheckPath: /api/health
+    envVars:
+      - key: PORT
+        value: 8787
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-3.6-flash
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: DEFAULT_TARGET_URL
+        value: https://neemans.com/products/the-luxe-loafers-tan
+      - key: CORS_ORIGIN
+        sync: false

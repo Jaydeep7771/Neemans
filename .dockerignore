@@ -1,0 +1,7 @@
+node_modules
+client
+sample-report
+.git
+.env
+.vercel
+npm-debug.log

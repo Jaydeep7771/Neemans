@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-plane font-sans text-ink antialiased;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Columns of figures must line up; standalone hero numbers should not. */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+
+  details > summary {
+    list-style: none;
+  }
+  details > summary::-webkit-details-marker {
+    display: none;
+  }
+}
